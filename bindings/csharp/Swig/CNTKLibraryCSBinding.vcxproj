@@ -122,6 +122,7 @@
   <ItemGroup>
     <None Include="..\..\common\CNTKManagedCommon.i" />
     <None Include="..\..\common\CNTKValueExtend.i" />
+    <None Include="..\..\common\CNTKWarnFilters.i" />
     <None Include="..\..\common\CNTK_ExceptionHandling.i" />
     <None Include="std_unordered_map.i" />
   </ItemGroup>
