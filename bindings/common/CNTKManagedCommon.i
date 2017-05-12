@@ -397,12 +397,10 @@ SWIG_STD_VECTOR_ENHANCED(CNTK::DeviceDescriptor)
 %rename (GetDeviceType) CNTK::DeviceDescriptor::Type;
 %rename (GetId) CNTK::DeviceDescriptor::Id;
 %rename (_SetExcludedDevices) CNTK::DeviceDescriptor::SetExcludedDevices;
-// %rename (AreEqualDeviceDescriptor) CNTK::operator==(const DeviceDescriptor& left, const DeviceDescriptor& right);
 
 // class Axis
 %rename (GetName) CNTK::Axis::Name;
 %rename (IsOrderedAxis) CNTK::Axis::IsOrdered;
-// %rename (AreEqualAxis) CNTK::operator==(const Axis& first, const Axis& second);
 %ignore_function CNTK::Axis::DefaultDynamicAxis();
 %ignore_function CNTK::Axis::OperandSequenceAxis();
 %ignore_function CNTK::Axis::DefaultBatchAxis();
@@ -412,9 +410,12 @@ SWIG_STD_VECTOR_ENHANCED(CNTK::DeviceDescriptor)
 %ignore_function CNTK::Axis::UnknownDynamicAxes();
 
 %rename(AreEqual) operator==;
+%rename(AreNotEqual) operator!=;
+%ignore operator[];
 
 // class Function
 %ignore CNTK::Function::BlockArgumentsMapping;
+%ignore CNTK::GetCorrespondingOutputVariableFromClone;
 %rename (GetName) CNTK::Function::Name;
 %rename (GetUid) CNTK::Function::Uid;
 %rename (GetRootFunction) CNTK::Function::RootFunction;
@@ -457,7 +458,7 @@ SWIG_STD_VECTOR_ENHANCED(CNTK::DeviceDescriptor)
 #ifdef SWIGCSHARP
 
 // Customize type mapping for modelBuffer, used by Load
-%apply char* INPUT { char* modelBuffer }
+// %apply char* INPUT { char* modelBuffer }
 %typemap(ctype) (char* modelBuffer) "char*"
 %typemap(imtype) (char* modelBuffer) "byte[]"
 %typemap(cstype) (char* modelBuffer) "byte[]"
@@ -486,6 +487,7 @@ SWIG_STD_VECTOR_ENHANCED(CNTK::DeviceDescriptor)
 
 // class Varaiable
 %ignore CNTK::Variable::Variable;
+%ignore CNTK::Variable::operator FunctionPtr;
 %rename ("%s") CNTK::Variable::Variable(const FunctionPtr& function);
 %rename (GetShape) CNTK::Variable::Shape;
 %rename (GetName) CNTK::Variable::Name;
@@ -498,13 +500,11 @@ SWIG_STD_VECTOR_ENHANCED(CNTK::DeviceDescriptor)
 %rename (_IsConstant) CNTK::Variable::IsConstant;
 %rename (_IsPlaceholder) CNTK::Variable::IsPlaceholder;
 %rename (GetOwner) CNTK::Variable::Owner;
-// %rename (AreEqualVariable) CNTK::operator==(const Variable& first, const Variable& second);
 
 // class NDShape
 %rename (GetDimensions) CNTK::NDShape::Dimensions;
 %rename (GetRank) CNTK::NDShape::Rank;
 %rename (GetTotalSize) CNTK::NDShape::TotalSize;
-// %rename (AreEqualShape) CNTK::operator==(const NDShape& first, const NDShape& second);
 %rename (_IsUnknown) CNTK::NDShape::IsUnknown;
 %rename (_HasInferredDimension) CNTK::NDShape::HasInferredDimension;
 %rename (_HasFreeDimension) CNTK::NDShape::HasFreeDimension;
